@@ -1,0 +1,38 @@
+BARKBOOK
+
+
+Data resources: 
+    Fake people and pet (cats and dogs) profiles. 
+
+MVP: 
+    - User profiles: username, real name, a short description, location (city, zipcode), picture, e-mail.
+    - Pet profiles: Picture, name, weight, age, breed.
+        Relationship between User and Pet: One User to many Pets. 
+    - A button that express interest in the pet and sends the owner a message with the persons email address. 
+    - Search feature: simple. By weight, by breed, by zipcode or city (NOT RADIUS). 
+
+Possible API's: 
+    - Facebook to log-in and sharing (not MVP).
+    - Twitter to share (not MVP).
+
+Future features: 
+    - Google Location API (after MVP)
+    - Messaging (NOT instant)
+
+
+Things to research: 
+    - The interest button. Sends a POST request to server. Separate data model. 
+    Profile requesting info. ID of pet profile that they express interest in. 
+    "Give me records where someone asked about a pet that I own"
+
+    Each table will have unique IDs. 
+    User table
+    Pet table
+    User + Pet table that relates both other tables (user id and pet id to estabilish relation between the two - join table). 
+    Pet interest table: Also auto generated ID, user ID (requester), pet ID, user owner ID. Shows owner who is interested in their pet and interested person the pets they are interested in. 
+
+    ID's - Primary key! Auto generated (in all four tables)
+
+
+
+Denormalization: makes easier to look things up. 
