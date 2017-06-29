@@ -6,6 +6,7 @@ from flask_sqlalchemy import SQLAlchemy
 # the Flask-SQLAlchemy helper library. On this, we can find the `session`
 # object, where we do most of our interactions (like committing, etc.)
 
+
 db = SQLAlchemy()
 
 
@@ -55,6 +56,11 @@ class User(db.Model):
     picture = db.Column(db.String,
                         nullable=True)
 
+    # Relationships:
+    pets = db.relationship("Pet")
+    adoptions = db.relationship("Adoption")
+
+
 
 class Pet(db.Model):
     """Pet profiles on Barkbook."""
@@ -88,27 +94,28 @@ class Pet(db.Model):
     breed = db.Column(db.String(64),
                       nullable=True)
 
-    picture = db.Column(db.String,
-                        nullable=True)
+    gender = db.Column(db.String(20),
+                       nullable=True)
 
     details = db.Column(db.Text,
                         nullable=True)
 
+    picture = db.Column(db.String,
+                        nullable=True)
+
+    # Relationships: 
+    species_relationship = db.relationship("Species")
+    adoption = db.relationship("Adoption")
+    user = db.relationship("User")
 
 class PetInterest(db.Model):
-    """Movie on ratings website."""
+    """Pets that have users interested in them."""
 
     __tablename__ = "pet_interest"
 
     # this is the table that will be queried and dispalyed on the users page
     # that shows users interested in pets up for adoption and the pets a user
     # has interest on
-
-    # def __repr__(self):
-    #     """Provide helpful representation when printed."""
-
-    #     the_m_rep = "<Movie movie_id=%s title=%s>"
-    #     return the_m_rep % (self.movie_id, self.title)
 
     interest_id = db.Column(db.Integer,
                          autoincrement=True,
@@ -128,7 +135,10 @@ class Adoption(db.Model):
         """Provide helpful representation when printed."""
 
         return "<Pet's owner ID: owner_id=%i pet's name: name=%s>" % (self.owner_id, 
-                                                                      pets.name)
+                                                                      self.pet.name)
+    adoption_id = db.Column(db.Integer, 
+                            autoincrement=True,
+                            primary_key=True)
 
     pet_id = db.Column(db.Integer,
                        db.ForeignKey("pets.pet_id"),
@@ -136,6 +146,10 @@ class Adoption(db.Model):
 
     owner_id = db.Column(db.ForeignKey("users.user_id"),
                          nullable=False)
+
+    # Relationships: 
+    pet = db.relationship('Pet')
+    owner = db.relationship('User')
 
 
 class Species(db.Model):
@@ -156,6 +170,8 @@ class Species(db.Model):
     name = db.Column(db.String,
                       nullable=False)
 
+    # Relationships: 
+    pets = db.relationship('Pet')
 
 ##############################################################################
 # Helper functions
@@ -165,7 +181,7 @@ def connect_to_db(app):
     """Connect the database to our Flask app."""
 
     # Configure to use our PstgreSQL database
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///ratings'
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///barkbook'
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     db.app = app
     db.init_app(app)
