@@ -14,5 +14,24 @@
     <input type="submit" value="Login">
   </form>
 
+  <form action="/signup" method="POST">
+      First name: 
+      Last name:
+      E-mail address: 
+      <input type="email" name="email" required><br><br>
+      Password: 
+      <input type="password" name="password">
+      <h4>Must be 6 to 12 characters long and contain letters and numbers</h4><br><br> <!-- Make it appear only when you click on the field to type-->
+      Zipcode:
+      <input type="number" name="zipcode"><br><br>
+      City:
+      Phone number:
+      Date of birth:
+      <!-- Profile picture:  
+            I need a way to allow my user to upload their picture to the profile. I know I want to save the address to that picture in my database. Where would it stay stored and -->
+
+      <input type="submit" value="Create now!">
+    </form>
+
 </body>
 </html>
