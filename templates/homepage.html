@@ -3,15 +3,26 @@
 
 {% block content %}
 
-  <form action="/login" method="POST">
-    E-mail: 
-    <input type="email" name="email" required><br><br>
-    Password: 
-    <input type="password" name="password"><br><br>
-    <input type="submit" value="Login"><br><br><br>
-  <!-- Make these all in same line in it's own 'thing', separated from the sign up form. # will need bootstrap # -->
-  </form>
+  <form class="form-inline" action="/login" method="POST">
+  <div class="form-group">
+    <label for="email">Email address</label>
+    <input type="email" class="form-control" id="email">
+  </div>
 
+  <div class="form-group">
+    <label for="password">Password</label>
+    <input type="password" class="form-control" id="password">
+  </div>
+
+  <div class="checkbox">
+    <label>
+      <input type="checkbox"> Remember me
+    </label>
+  </div>
+    <button type="submit" class="btn btn-default">Log in</button>
+  </form>
+  
+ <!-- Put this in bootstrap -->
   <form action="/signup" method="POST">
     First name: 
     Last name:
