@@ -8,6 +8,12 @@ from model import connect_to_db, User, Pet, PetInterest, Adoption, Species
 app = Flask(__name__)
 
 
+@app.route('/')
+def see_homepage():
+
+    return render_template('homepage.html')
+
+
 @app.route('/puppy')
 def see_puppy():
 

@@ -18,6 +18,7 @@ Possible API's:
 Future features: 
     - Google Location API (after MVP)
     - Messaging (NOT instant)
+    - Users to upload profile picture (Figure out how it is going to work, where it will be store, etc.)
 
 
 Things to research: 
