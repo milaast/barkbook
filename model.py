@@ -47,7 +47,7 @@ class User(db.Model):
     city = db.Column(db.String(64),
                      nullable=False)
 
-    phone = db.Column(db.Integer, 
+    phone = db.Column(db.String(12), 
                       nullable=True)
 
     dob = db.Column(db.DateTime,

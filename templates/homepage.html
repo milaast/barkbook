@@ -4,7 +4,7 @@
 {% block content %}
   <div class="container-fluid">
     <div class="row">
-      <div class="col-xs-9 col-xs-push-3">
+      <div class="col-xs-8 col-xs-push-4">
         <form class="form-inline" action="/" method="POST">
           <div class="form-group">
             <label for="email">Email address</label>
@@ -20,41 +20,9 @@
               <!-- What to do if 'remember me' is checked? -->
             </label>
           </div>
-            <button type="submit" class="btn btn-default">Log in</button>
+            <button type="submit" class="btn-default">Log in</button>
         </form>
       </div>
-    </div>
-  </div>
-  <br><br><br><br>
-
-
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-xs-4 col-xs-push-8"
-        <form action="/signup" method="POST">
-          First name: 
-          <input type="text" name="first_name" required><br><br>
-          Last name:
-          <input type="text" name="last_name" required><br><br>
-          E-mail address: 
-          <input type="email" name="email" required><br><br>
-          Password: 
-          <input type="password" name="password"><br>
-          Must be 6 to 12 characters long and contain letters and numbers<br><br> <!-- Make it appear only when you click on the field to type. Make font smaller size-->
-          Zipcode:
-          <input type="number" name="zipcode"><br><br>
-          City:
-          <input type="text" name="city" required><br><br>
-          Phone number:
-          <input type="number" name="zipcode" required>
-          <br><br>
-          Date of birth:
-          <input type="date" name="dob" required><br><br>
-          <!-- Profile picture:  
-              I need a way to allow my user to upload their picture to the profile. I know I want to save the address to that picture in my database. Where would it stay stored and -->
-          <input type="reset" value="Start over">
-          <input type="submit" value="Create now!">
-        </form>
     </div>
   </div>
 
