@@ -11,9 +11,10 @@ app.secret_key = "ABC"
 
 
 @app.route("/")
-def show_homepage():
+def show_homepage_login():
+    """ Shows user the homepage and the login form. """
 
-    return render_template('homepage.html')
+    return render_template("homepage.html")
 
 
 @app.route("/", methods=["POST"])
@@ -47,10 +48,18 @@ def log_user_in():
             session["user_id"] = user_id
 
             flash("You're successfully logged in")
-            return redirect("/")
+            return redirect("/" + str(user_id))
             # the person's profile. Use jinja to fill in URL
 
     #redirect routes are temporary, until new templates are designed
+
+
+@app.route("/<user_id>")
+def show_profile(user_id):
+
+    user = User.query.get(user_id)
+
+    return render_template("user_profile.html", user=user)
 
 
 @app.route("/register")
@@ -92,10 +101,10 @@ def register_user():
         db.session.add(new_user)
         db.session.commit()
 
+        # session["user_id"] = user_id ; query database to get the user_id for
+        # this user and start a session, so you can pass i over to the pet profile.
         flash("You successfully created an account")
-        return redirect("/")
-        # redirect to their profile, where they will be able to add pictures
-        # add pets, or look for pets
+        return redirect("/pet_profile")
 
 
     else:
@@ -103,12 +112,53 @@ def register_user():
         return redirect("/register")
 
 
-@app.route("/login")
-def show_login():
+@app.route("/pet_profile")
+def pet_profile():
+    """Shows user account registration form."""
 
-    return render_template("login.html")
+    return render_template("create_pet_profile.html")
 
 
+@app.route("/pet_profile", methods=["POST"])
+def add_pet_profile():
+    """ Create pet profile.
+        Adds pet profile to database and, if available for adoption, 
+        adds pet to adoption table.
+         """
+
+    user_id = User.query.get(user_id) # want to get user_id from the session 
+    name = request.form.get("name")
+    species = request.form.get("species")
+    age = request.form.get("age")
+    breed = request.form.get("breed")
+    gender = request.form.get("gender")
+    details = request.form.get("details")
+    adoptable = request.form.get("adoptable")
+
+    pet = Pet(name=name,
+              species=species,
+              age=age,
+              breed=breed,
+              gender=gender,
+              details=details)
+
+    db.session.add(pet)
+    db.session.commit()
+
+    if adoptable == "yes": 
+        
+        pet_id = Pet.query.filter(Pet.name==name)
+        owner_id = user_id
+
+        adoption = Adoption(pet_id=pet_id,
+                            owner_id=owner_id)
+
+        db.session.add(adoption)
+        db.session.commit()
+        flash("Your pet is now available for adoption!")
+
+    flash("Your pet's profile has been created!")
+    redirect("/")
 
 @app.route('/puppy')
 def see_puppy():
