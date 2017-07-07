@@ -53,6 +53,16 @@ def log_user_in():
 
     #redirect routes are temporary, until new templates are designed
 
+# create a link on the navbar to logout
+@app.route("/logout")
+def log_user_out():
+
+    session.clear()
+    flash("You've successfully logged out")
+
+    return redirect("/")
+
+
 
 @app.route("/<user_id>")
 def show_profile(user_id):
@@ -101,6 +111,10 @@ def register_user():
         db.session.add(new_user)
         db.session.commit()
 
+        # none of this worked
+        # user = User.query.filter(User.email==email).one()
+        # session["user_id"] = user.user_id
+
         # session["user_id"] = user_id ; query database to get the user_id for
         # this user and start a session, so you can pass i over to the pet profile.
         flash("You successfully created an account")
@@ -125,8 +139,9 @@ def add_pet_profile():
         Adds pet profile to database and, if available for adoption, 
         adds pet to adoption table.
          """
-
-    user_id = User.query.get(user_id) # want to get user_id from the session 
+         
+    # also not working
+    # user_id = User.query.get(user) 
     name = request.form.get("name")
     species = request.form.get("species")
     age = request.form.get("age")
@@ -135,7 +150,8 @@ def add_pet_profile():
     details = request.form.get("details")
     adoptable = request.form.get("adoptable")
 
-    pet = Pet(name=name,
+    pet = Pet(user_id=user_id,
+              name=name,
               species=species,
               age=age,
               breed=breed,
