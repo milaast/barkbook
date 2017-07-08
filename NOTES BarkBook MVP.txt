@@ -28,6 +28,8 @@ MVP:
     - Implement a link on the user's profile where they can create more pet profiles. (STILL NEED TO CREATE THE USER PROFILE TEMPLATE)
     - When the user creates a pet profile, if they mark the pet up for adoption, automatically add that pet to adoptions table. 
     - Logout function after user has logged in/created the account. (function has been created on server file but not implemented.)
+    - Implement 'interest button' that should only show in profiles of pets that are currently in adoption table
+    - Implement search feature 
 
     ***************************************************************************
 
