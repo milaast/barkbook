@@ -47,6 +47,9 @@ class User(db.Model):
     city = db.Column(db.String(64),
                      nullable=False)
 
+    state = db.Column(db.String(2),
+                      nullable=False)
+
     phone = db.Column(db.String(12), 
                       nullable=True)
 

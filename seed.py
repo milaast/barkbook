@@ -19,7 +19,7 @@ def load_users():
     # Read u.user file and insert data
     for row in open("data/users_data"):
         row = row.rstrip()
-        user_id, first_name, last_name, email, password, zipcode, city = row.split("|")
+        user_id, first_name, last_name, email, password, zipcode, city, state = row.split("|")
 
         user = User(user_id=user_id,
                     first_name=first_name,
@@ -27,7 +27,8 @@ def load_users():
                     email=email,
                     password=password,
                     zipcode=zipcode,
-                    city=city)
+                    city=city,
+                    state=state)
 
         # Add to the session or it won't ever be stored
         db.session.add(user)
