@@ -64,7 +64,7 @@ def log_user_out():
 
 
 
-@app.route("/<user_id>")
+@app.route("/users/<user_id>")
 def show_profile(user_id):
 
     user = User.query.get(user_id)
@@ -92,6 +92,7 @@ def register_user():
     password = request.form.get("password")
     zipcode = request.form.get("zipcode")
     city = request.form.get("city")
+    state = request.form.get("state")
     phone = request.form.get("phone")
     dob = request.form.get("dob")
 
@@ -105,6 +106,7 @@ def register_user():
                         password=password,
                         zipcode=zipcode,
                         city=city,
+                        state=state,
                         phone=phone,
                         dob=dob)
 
@@ -115,7 +117,9 @@ def register_user():
         # user = User.query.filter(User.email==email).one()
         # session["user_id"] = user.user_id
 
-        # session["user_id"] = user_id ; query database to get the user_id for
+        session["user_id"] = new_user.user_id
+
+        # query database to get the user_id for
         # this user and start a session, so you can pass i over to the pet profile.
         flash("You successfully created an account")
         return redirect("/pet_profile")
@@ -130,6 +134,8 @@ def register_user():
 def pet_profile():
     """Shows user account registration form."""
 
+    print session["user_id"]
+
     return render_template("create_pet_profile.html")
 
 
@@ -139,9 +145,9 @@ def add_pet_profile():
         Adds pet profile to database and, if available for adoption, 
         adds pet to adoption table.
          """
-         
+
     # also not working
-    # user_id = User.query.get(user) 
+    # user_id = User.query.get(session["user_id"]) 
     name = request.form.get("name")
     species = request.form.get("species")
     age = request.form.get("age")
@@ -150,13 +156,13 @@ def add_pet_profile():
     details = request.form.get("details")
     adoptable = request.form.get("adoptable")
 
-    pet = Pet(user_id=user_id,
-              name=name,
-              species=species,
-              age=age,
-              breed=breed,
-              gender=gender,
-              details=details)
+    pet = Pet(user_id=session["user_id"],
+          name=name,
+          species=species,
+          age=age,
+          breed=breed,
+          gender=gender,
+          details=details)
 
     db.session.add(pet)
     db.session.commit()
@@ -174,7 +180,8 @@ def add_pet_profile():
         flash("Your pet is now available for adoption!")
 
     flash("Your pet's profile has been created!")
-    redirect("/")
+    return redirect("/")
+
 
 @app.route('/puppy')
 def see_puppy():

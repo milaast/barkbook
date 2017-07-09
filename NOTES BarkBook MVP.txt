@@ -7,7 +7,7 @@ Data resources:
 
 MVP: 
     - User profiles: username, real name, a short description, location (city, zipcode), picture, e-mail.
-    ### No more description. Only oersonal information, among other details. 
+    ### No more description. Only personal information, among other details. 
     ### Still don't have the feature to upload the picture.
 
     - Pet profiles: Picture, name, weight, age, breed.
