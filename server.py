@@ -49,7 +49,6 @@ def log_user_in():
 
             flash("You're successfully logged in")
             return redirect("/" + str(user_id))
-            # the person's profile. Use jinja to fill in URL
 
     #redirect routes are temporary, until new templates are designed
 
@@ -63,9 +62,8 @@ def log_user_out():
     return redirect("/")
 
 
-
 @app.route("/users/<user_id>")
-def show_profile(user_id):
+def show_user_profile(user_id):
 
     user = User.query.get(user_id)
 
@@ -122,7 +120,7 @@ def register_user():
         # query database to get the user_id for
         # this user and start a session, so you can pass i over to the pet profile.
         flash("You successfully created an account")
-        return redirect("/pet_profile")
+        return redirect("/user_frontpage")
 
 
     else:
@@ -130,7 +128,18 @@ def register_user():
         return redirect("/register")
 
 
-@app.route("/pet_profile")
+@app.route("/user_frontpage")
+def show_frontpage():
+    """Shows user their dashboard with options on what to do next."""
+
+    user_id = session["user_id"]
+    print "USER_ID =>" + str(user_id)
+    user = User.query.get(user_id)
+
+    return render_template("user_frontpage.html", user=user)
+
+
+@app.route("/create_pet_profile")
 def pet_profile():
     """Shows user account registration form."""
 
@@ -139,7 +148,7 @@ def pet_profile():
     return render_template("create_pet_profile.html")
 
 
-@app.route("/pet_profile", methods=["POST"])
+@app.route("/create_pet_profile", methods=["POST"])
 def add_pet_profile():
     """ Create pet profile.
         Adds pet profile to database and, if available for adoption, 
@@ -167,10 +176,10 @@ def add_pet_profile():
     db.session.add(pet)
     db.session.commit()
 
-    if adoptable == "yes": 
+    if adoptable: 
         
-        pet_id = Pet.query.filter(Pet.name==name)
-        owner_id = user_id
+        pet_id = pet.pet_id
+        owner_id = pet.user_id
 
         adoption = Adoption(pet_id=pet_id,
                             owner_id=owner_id)
@@ -181,6 +190,15 @@ def add_pet_profile():
 
     flash("Your pet's profile has been created!")
     return redirect("/")
+    # redirect to user's profile page
+
+
+@app.route("/pets/<pet_id>")
+def show_pet_profile(user_id):
+
+    pet = Pet.query.get(pet_id)
+
+    return render_template("pet_profile.html", pet=pet)
 
 
 @app.route('/puppy')
