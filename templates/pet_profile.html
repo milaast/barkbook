@@ -1,14 +1,19 @@
 {% extends 'base.html' %}
+{% block title %}Barkbook!{% endblock %}
+
 {% block content %}
 
+    {% if pet.species == 1 %}
+    <h2>Woof! I am {{ pet.name }}</h2>
+    {% elif pet.species == 2 %}
+    <h2>Meow! I am {{ pet.name }}</h2>
+    {% endif %}
 
-<!-- If animal species = cat, meow.
-     If animal special = dog, woof.
-     "Meow, I am #cat_name#" and so on.  -->
 
-Edit profile
-Delete profile
-See people interested in pet
+Delete profile <!-- Call the function that will delete the pet from database --> 
+See people interested in {{ pet.name }}
+
+<a href="/user_frontpage">Back to homepage</a>
 
 
 {% endblock %}

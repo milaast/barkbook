@@ -1,14 +1,31 @@
 {% extends 'base.html' %}
+{% block title %}Barkbook!{% endblock %}
+
+
 {% block content %}
 
 <!-- First page the user comes accross after creating an account. Give the user options. -->
 
-<h1>HELLO, {{ user.first_name }}!</h1>
+  <h1>HELLO, {{ user.first_name }}!</h1>
 
-Create pet profile
-See / edit pet profile <!-- Take user to a list of pets -->
-Search for pets
-See pets user is interested in. 
+  See available pets <br>
+  <!-- Form with a submit button that will call a function that will query the adoptions table in the database and show the user all the pets up for adoption -->
+  <a href="/create_pet_profile">Create a pet profile</a><br>
+
+  <a href="/users/pets_list">See / edit pet profile</a><br> <!-- Take user to a list of pets --> <!-- Create route! -->
+
+ <a href="url">Search for adoptable pets</a><br> <!-- Create route!!! -->
+
+  <a href="url">See the pets you are interested in</a><br> <!-- List of pets the user clicked "LIKE" on. 
+  QUERY DATABASE: INTEREST TABLE
+  Create a route -->
+
+  <a href="url">See the people interested in your adoptable pet</a><br> <!-- List of people who clicked "LIKE" on user's pets. SEPARATE BY PET.
+  QUERY INTEREST TABLE ON DB -->
+
+  <a href="/logout">Logout</a>
+
+
 
 
 {% endblock %}

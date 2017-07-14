@@ -12,16 +12,16 @@ app.secret_key = "ABC"
 
 @app.route("/")
 def show_homepage_login():
-    """ Shows user the homepage and the login form. """
+    """ Shows user the homepage, where user is able to log in or create a 
+    new account. """
 
     return render_template("homepage.html")
 
 
 @app.route("/", methods=["POST"])
 def log_user_in():
-    """ Takes information from form and validates against database.
-
-        """
+    """ Takes information from login form and validates against database
+    in order to log user in and start session. """
 
     email = request.form.get("email")
     form_password = request.form.get("password")
@@ -48,11 +48,9 @@ def log_user_in():
             session["user_id"] = user_id
 
             flash("You're successfully logged in")
-            return redirect("/" + str(user_id))
+            return redirect("/users/" + str(user_id))
 
-    #redirect routes are temporary, until new templates are designed
-
-# create a link on the navbar to logout
+    
 @app.route("/logout")
 def log_user_out():
 
@@ -62,12 +60,32 @@ def log_user_out():
     return redirect("/")
 
 
+@app.route("/user_frontpage")
+def show_frontpage():
+    """Shows user their dashboard with options on what to do next."""
+
+    user_id = session["user_id"]
+    print "USER_ID =>" + str(user_id)
+    user = User.query.get(user_id)
+
+    return render_template("user_frontpage.html", user=user)
+
+
 @app.route("/users/<user_id>")
 def show_user_profile(user_id):
 
     user = User.query.get(user_id)
 
-    return render_template("user_profile.html", user=user)
+    return render_template("user_frontpage.html", user=user)
+
+
+@app.route("/users/pets_list")
+def show_pets_list():
+
+    user_id = session["user_id"]
+    user = User.query.get(user_id)
+
+    return render_template("pets_list.html", user=user)
 
 
 @app.route("/register")
@@ -128,17 +146,6 @@ def register_user():
         return redirect("/register")
 
 
-@app.route("/user_frontpage")
-def show_frontpage():
-    """Shows user their dashboard with options on what to do next."""
-
-    user_id = session["user_id"]
-    print "USER_ID =>" + str(user_id)
-    user = User.query.get(user_id)
-
-    return render_template("user_frontpage.html", user=user)
-
-
 @app.route("/create_pet_profile")
 def pet_profile():
     """Shows user account registration form."""
@@ -190,11 +197,11 @@ def add_pet_profile():
 
     flash("Your pet's profile has been created!")
     return redirect("/")
-    # redirect to user's profile page
+    # user's list of pets page
 
 
 @app.route("/pets/<pet_id>")
-def show_pet_profile(user_id):
+def show_pet_profile(pet_id):
 
     pet = Pet.query.get(pet_id)
 
