@@ -128,6 +128,10 @@ class PetInterest(db.Model):
                   db.ForeignKey("adoptions.adoption_id"),
                   nullable=False)
 
+    interested_person_id = db.Column(db.Integer,
+                           db.ForeignKey("users.user_id"),
+                           nullable=False)
+
 
 class Adoption(db.Model):
     """Identify pets that are available for adoption."""

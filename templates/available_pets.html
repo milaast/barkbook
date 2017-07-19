@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block title %}Barkbook!{% endblock %}
+
+{% block content %}
+
+  <ul>
+
+    {% for pet in adoption_recs %}
+      <li><a href="/pets/{{ pet.pet_id }}">{{ pet.pet.name }}</a></li>
+    {% endfor %}
+
+  </ul>
+
+{% endblock %}

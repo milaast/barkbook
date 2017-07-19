@@ -8,17 +8,18 @@
 
   <h1>HELLO, {{ user.first_name }}!</h1>
 
-  See available pets <br>
-  <!-- Form with a submit button that will call a function that will query the adoptions table in the database and show the user all the pets up for adoption -->
-  <a href="/create_pet_profile">Create a pet profile</a><br>
+  <a href="/search_pets">See available pets</a><br>
+  <!-- Link is a form of submition that will call a function that will query the adoptions table in the database and show the user all the pets up for adoption -->
 
-  <a href="/users/pets_list">See / edit pet profile</a><br> <!-- Take user to a list of pets --> <!-- Create route! -->
+  <a href="/create_pet_profile">Create a pet profile</a><br> 
+  <!-- OK!!!!! -->
 
- <a href="url">Search for adoptable pets</a><br> <!-- Create route!!! -->
+  <a href="/users/pets_list">See / edit pet profile</a><br> 
+  <!-- Take user to a list of pets -->
 
-  <a href="url">See the pets you are interested in</a><br> <!-- List of pets the user clicked "LIKE" on. 
+  <a href="/see_my_interests">See the pets you are interested in</a><br> <!-- List of pets the user clicked "LIKE" on. 
   QUERY DATABASE: INTEREST TABLE
-  Create a route -->
+  Create a route and create like button on pet profile.  -->
 
   <a href="url">See the people interested in your adoptable pet</a><br> <!-- List of people who clicked "LIKE" on user's pets. SEPARATE BY PET.
   QUERY INTEREST TABLE ON DB -->

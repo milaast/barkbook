@@ -10,7 +10,19 @@
     {% endif %}
 
 
-Delete profile <!-- Call the function that will delete the pet from database --> 
+ <!-- Call the function that will delete the pet from database --> 
+<a href="/delete_pet/{{ pet.pet_id }}">Delete profile</a>
+
+<!-- If it's my pet, show this -->
+
+{% if current_user_is_pet_owner %}
+<a href="/make_non_adoptable/{{ pet.pet_id }}">This pet isn't adoptable anymore</a>
+<a href="/make_adoptable/{{ pet.pet_id }}">This pet is adoptable</a>
+{% else %}
+<a href="/show_interest/{{ pet.pet_id }}">I am interested in this pet!</a>
+{% endif %}
+
+
 See people interested in {{ pet.name }}
 
 <a href="/user_frontpage">Back to homepage</a>

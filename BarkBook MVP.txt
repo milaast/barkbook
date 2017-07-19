@@ -1,6 +1,10 @@
 BARKBOOK
 
+Color: 
+    turquoise: 24c3c3
+    magenta: e000bb
 
+    
 Data resources: 
     Fake people and pet (cats and dogs) profiles. 
 

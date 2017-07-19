@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block title %}Barkbook!{% endblock %}
+
+{% block content %}
+
+
+  <form action="/see_available_pets">
+    <button name="species" value="1" type="submit">Look for dogs</button>
+    <button name="species" value="2" type="submit">Look for cats</button>
+  </form>
+
+
+{% endblock %}

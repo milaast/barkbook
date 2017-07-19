@@ -65,7 +65,7 @@ def show_frontpage():
     """Shows user their dashboard with options on what to do next."""
 
     user_id = session["user_id"]
-    print "USER_ID =>" + str(user_id)
+    print "USER_ID =>" + str(user_id)       # making sure session is ok.
     user = User.query.get(user_id)
 
     return render_template("user_frontpage.html", user=user)
@@ -196,7 +196,7 @@ def add_pet_profile():
         flash("Your pet is now available for adoption!")
 
     flash("Your pet's profile has been created!")
-    return redirect("/")
+    return redirect("pets/" + str(pet_id))
     # user's list of pets page
 
 
@@ -205,8 +205,88 @@ def show_pet_profile(pet_id):
 
     pet = Pet.query.get(pet_id)
 
-    return render_template("pet_profile.html", pet=pet)
+    interests = PetInterest.query.filter(PetInterest.has(pet_id)).all()
 
+
+    return render_template("pet_profile.html", pet=pet,
+                                               current_user_is_pet_owner=(session["user_id"]==pet.user_id))
+
+
+@app.route("/search_pets")
+def search_available_pets():
+
+    return render_template("search_pets.html")
+
+
+@app.route("/see_available_pets")
+def show_available_pets():
+
+    species = request.args.get("species")
+    adoption_recs = Adoption.query.filter(Adoption.pet.has(species=species)).all()
+
+    print adoption_recs
+
+    return render_template("available_pets.html", adoption_recs=adoption_recs)
+
+
+@app.route("/delete_pet/<pet_id>")
+def delete_pet(pet_id):
+
+    Adoption.query.filter(Adoption.pet.has(pet_id=pet_id)).delete(synchronize_session="fetch")
+    Pet.query.filter(Pet.pet_id==pet_id).delete(synchronize_session="fetch")
+
+    db.session.commit()
+
+    return redirect("/user_frontpage")
+
+@app.route("/make_non_adoptable/<pet_id>")
+def delete_adopt_recs(pet_id): 
+
+    Adoption.query.filter(Adoption.pet.has(pet_id=pet_id)).delete(synchronize_session="fetch")
+
+    db.session.commit()
+
+    return redirect("/user_frontpage")
+
+
+@app.route("/make_adoptable/<pet_id>")
+def add_for_adoption(pet_id): 
+    
+    owner_id = session["user_id"]
+    adoption = Adoption(pet_id=pet_id,
+                        owner_id=owner_id)
+
+    db.session.add(adoption)
+    db.session.commit()
+    flash("Your pet is now available for adoption!")
+
+    return redirect("/user_frontpage")
+
+
+@app.route("/show_interest/<pet_id>")
+def show_interest(pet_id): 
+    
+    current_user_id = session["user_id"]
+    adoption = Adoption.query.filter(Adoption.pet.has(pet_id=pet_id)).first()
+    interest = PetInterest(adoption_id=adoption.adoption_id,
+                           interested_person_id=current_user_id)
+
+    db.session.add(interest)
+    db.session.commit()
+    flash("Thanks!")
+
+    return redirect("/user_frontpage")
+
+
+@app.route("/see_my_interests")
+def see_interests(): 
+    
+    current_user_id = session["user_id"]
+    my_interests = PetInterest.query.filter(PetInterest.interested_person_id==current_user_id).all()
+
+    print my_interests
+
+    return redirect ("/")
 
 @app.route('/puppy')
 def see_puppy():
