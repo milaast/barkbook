@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block title %}Barkbook!{% endblock %}
+
+
+{% block content %}
+
+<!-- if lists is empty: "" -->
+
+  {% if my_interests %}
+    <ul>
+
+      {% for pet in my_interests %}
+        <li>{{ pet.adoption.pet.name }}</li>
+      {% endfor %}
+
+    </ul>
+  {% else %}
+    <h4>You haven't shown interest in any pets yet</h4>
+  {% endif %}
+
+{% endblock %}

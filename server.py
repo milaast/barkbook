@@ -148,7 +148,7 @@ def register_user():
 
 @app.route("/create_pet_profile")
 def pet_profile():
-    """Shows user account registration form."""
+    """Shows form to create pet profile."""
 
     print session["user_id"]
 
@@ -202,10 +202,10 @@ def add_pet_profile():
 
 @app.route("/pets/<pet_id>")
 def show_pet_profile(pet_id):
+    print pet_id, type(pet_id)
+    pet = Pet.query.get(int(pet_id))
 
-    pet = Pet.query.get(pet_id)
-
-    interests = PetInterest.query.filter(PetInterest.has(pet_id)).all()
+    interests = PetInterest.query.filter(PetInterest.adoption.has(pet_id=pet_id)).all()
 
 
     return render_template("pet_profile.html", pet=pet,
@@ -231,6 +231,7 @@ def show_available_pets():
 
 @app.route("/delete_pet/<pet_id>")
 def delete_pet(pet_id):
+    """ Delete a pet profile. """
 
     Adoption.query.filter(Adoption.pet.has(pet_id=pet_id)).delete(synchronize_session="fetch")
     Pet.query.filter(Pet.pet_id==pet_id).delete(synchronize_session="fetch")
@@ -241,6 +242,7 @@ def delete_pet(pet_id):
 
 @app.route("/make_non_adoptable/<pet_id>")
 def delete_adopt_recs(pet_id): 
+    """ Make it so a pet isn;t up for adoption anymore. """
 
     Adoption.query.filter(Adoption.pet.has(pet_id=pet_id)).delete(synchronize_session="fetch")
 
@@ -265,6 +267,8 @@ def add_for_adoption(pet_id):
 
 @app.route("/show_interest/<pet_id>")
 def show_interest(pet_id): 
+    """ Show interest in a pet. 
+        Adds interest record to database. """
     
     current_user_id = session["user_id"]
     adoption = Adoption.query.filter(Adoption.pet.has(pet_id=pet_id)).first()
@@ -280,13 +284,31 @@ def show_interest(pet_id):
 
 @app.route("/see_my_interests")
 def see_interests(): 
-    
+    """ See the pets I am interested in. """
+
     current_user_id = session["user_id"]
     my_interests = PetInterest.query.filter(PetInterest.interested_person_id==current_user_id).all()
 
     print my_interests
 
-    return redirect ("/")
+    return render_template("/see_my_interests.html", my_interests=my_interests)
+
+
+
+
+@app.route("/people_likes/<pet_id>")
+def people_likes(pet_id): 
+    """ Show list of users that have shown interest in a pet. """
+
+    current_user_id = session["user_id"]
+    # query interest table with pet_id
+
+    adoption = Adoption.query.filter(Adoption.pet.has(pet_id=pet_id)).first()
+    likes = PetInterest.query.filter(PetInterest.adoption.has(pet_id=pet_id)).all()
+
+    return render_template("/people_likes.html")
+
+
 
 @app.route('/puppy')
 def see_puppy():

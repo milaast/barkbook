@@ -5,27 +5,24 @@
 
     {% if pet.species == 1 %}
     <h2>Woof! I am {{ pet.name }}</h2>
+    <!-- Render picture of pups in database here? Image object and use Jinja to pick the right picture -->
     {% elif pet.species == 2 %}
     <h2>Meow! I am {{ pet.name }}</h2>
     {% endif %}
 
 
  <!-- Call the function that will delete the pet from database --> 
-<a href="/delete_pet/{{ pet.pet_id }}">Delete profile</a>
-
-<!-- If it's my pet, show this -->
+<a href="/delete_pet/{{ pet.pet_id }}">Delete profile</a><br>
 
 {% if current_user_is_pet_owner %}
-<a href="/make_non_adoptable/{{ pet.pet_id }}">This pet isn't adoptable anymore</a>
-<a href="/make_adoptable/{{ pet.pet_id }}">This pet is adoptable</a>
+<a href="/make_non_adoptable/{{ pet.pet_id }}">This pet isn't adoptable anymore</a><br>
+<a href="/make_adoptable/{{ pet.pet_id }}">This pet is adoptable</a><br>
+<a href="/people_likes/{{ pet.pet_id }}">See people interested in {{ pet.name }}</a><br>
 {% else %}
-<a href="/show_interest/{{ pet.pet_id }}">I am interested in this pet!</a>
+<a href="/show_interest/{{ pet.pet_id }}">I am interested in this pet!</a><br>
 {% endif %}
-
-
-See people interested in {{ pet.name }}
-
-<a href="/user_frontpage">Back to homepage</a>
+<br><br>
+<a href="/user_frontpage">Back to homepage</a><br><br>
 
 
 {% endblock %}

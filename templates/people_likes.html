@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block title %}Barkbook!{% endblock %}
+
+{% block content %}
+
+  <!-- Query pets database and list the pets that belong to the user in session -->
+
+
+  <ul>
+      {% for user in likes %}
+          <li>
+                {{ user.interested_person_id }} 
+          </li>
+      {% endfor %}
+    </ul>
+
+
+{% endblock %}

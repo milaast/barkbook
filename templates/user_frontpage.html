@@ -6,7 +6,7 @@
 
 <!-- First page the user comes accross after creating an account. Give the user options. -->
 
-  <h1>HELLO, {{ user.first_name }}!</h1>
+  <h1>Hello, {{ user.first_name }}!</h1>
 
   <a href="/search_pets">See available pets</a><br>
   <!-- Link is a form of submition that will call a function that will query the adoptions table in the database and show the user all the pets up for adoption -->
@@ -14,17 +14,14 @@
   <a href="/create_pet_profile">Create a pet profile</a><br> 
   <!-- OK!!!!! -->
 
-  <a href="/users/pets_list">See / edit pet profile</a><br> 
+  <a href="/users/pets_list">See / edit my pets</a><br> 
   <!-- Take user to a list of pets -->
 
-  <a href="/see_my_interests">See the pets you are interested in</a><br> <!-- List of pets the user clicked "LIKE" on. 
+  <a href="/see_my_interests">See pets I am interested in</a><br> <!-- List of pets the user clicked "LIKE" on. 
   QUERY DATABASE: INTEREST TABLE
   Create a route and create like button on pet profile.  -->
 
-  <a href="url">See the people interested in your adoptable pet</a><br> <!-- List of people who clicked "LIKE" on user's pets. SEPARATE BY PET.
-  QUERY INTEREST TABLE ON DB -->
-
-  <a href="/logout">Logout</a>
+  
 
 
 

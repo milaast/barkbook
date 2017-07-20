@@ -132,6 +132,8 @@ class PetInterest(db.Model):
                            db.ForeignKey("users.user_id"),
                            nullable=False)
 
+    adoption = db.relationship('Adoption')
+
 
 class Adoption(db.Model):
     """Identify pets that are available for adoption."""
