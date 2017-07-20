@@ -7,9 +7,14 @@
 
 
   <ul>
-      {% for user in likes %}
+      {% for item in likes %}
           <li>
-                {{ user.interested_person_id }} 
+                {{ item.user.first_name }} {{ item.user.last_name }}
+                <br>
+                {{ item.user.email }}
+                <br>
+                {{ item.user.phone }} 
+                <br>
           </li>
       {% endfor %}
     </ul>

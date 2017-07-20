@@ -133,7 +133,7 @@ class PetInterest(db.Model):
                            nullable=False)
 
     adoption = db.relationship('Adoption')
-
+    user = db.relationship('User')
 
 class Adoption(db.Model):
     """Identify pets that are available for adoption."""

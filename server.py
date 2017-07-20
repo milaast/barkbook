@@ -279,7 +279,7 @@ def show_interest(pet_id):
     db.session.commit()
     flash("Thanks!")
 
-    return redirect("/user_frontpage")
+    return redirect("/see_my_interests")
 
 
 @app.route("/see_my_interests")
@@ -295,18 +295,21 @@ def see_interests():
 
 
 
-
+# KENNER WUZ HERE
+# You can say that just like just write a reminder for me to 
+# debug this route and make it print the right information.
 @app.route("/people_likes/<pet_id>")
 def people_likes(pet_id): 
     """ Show list of users that have shown interest in a pet. """
 
     current_user_id = session["user_id"]
-    # query interest table with pet_id
-
     adoption = Adoption.query.filter(Adoption.pet.has(pet_id=pet_id)).first()
     likes = PetInterest.query.filter(PetInterest.adoption.has(pet_id=pet_id)).all()
 
-    return render_template("/people_likes.html")
+    print "ADOPTION OBJ: ", adoption
+    print "LIKES OBJ: ", likes
+
+    return render_template("/people_likes.html", likes=likes)
 
 
 
