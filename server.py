@@ -46,7 +46,7 @@ def log_user_in():
         else:
 
             session["user_id"] = user_id
-
+            print "SESSION: ", session.items()
             flash("You're successfully logged in")
             return redirect("/users/" + str(user_id))
 
@@ -221,8 +221,11 @@ def search_available_pets():
 @app.route("/see_available_pets")
 def show_available_pets():
 
+    user_id = session["user_id"]
     species = request.args.get("species")
-    adoption_recs = Adoption.query.filter(Adoption.pet.has(species=species)).all()
+    adoption_recs = Adoption.query.filter(Adoption.pet.has(species=species),
+                                          ~Adoption.pet.has(user_id=user_id)).all() # and owner_id != than owner_id in session
+
 
     print adoption_recs
 

@@ -9,7 +9,9 @@
     {% elif pet.species == 2 %}
     <h2>Meow! I am {{ pet.name }}</h2>
     {% endif %}
-
+    <br><br>
+    <img src="{{ pet.picture }}"" alt="{{ pet.name }}">
+    <br><br><br>
 
  <!-- Call the function that will delete the pet from database --> 
 <a href="/delete_pet/{{ pet.pet_id }}">Delete profile</a><br>

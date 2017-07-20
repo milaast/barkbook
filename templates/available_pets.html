@@ -6,7 +6,13 @@
   <ul>
 
     {% for pet in adoption_recs %}
-      <li><a href="/pets/{{ pet.pet_id }}">{{ pet.pet.name }}</a></li>
+
+      <a href="/pets/{{ pet.pet_id }}">
+        <img src="{{ pet.pet.picture }}"" alt="{{ pet.pet.name }}">
+      </a><br>
+      <h3>{{ pet.pet.name }}</h3>
+      <br><br>
+
     {% endfor %}
 
   </ul>

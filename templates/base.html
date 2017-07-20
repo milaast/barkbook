@@ -5,16 +5,16 @@
   <title>{% block title %}TITLE GOES HERE{% endblock %}</title>
   <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
   <!-- Put CSS here --> 
-</head>
-
+</head
 
 <body>
-  <!-- Will be orange -->
+  <!-- Will be >
+orange -->
   <nav class="navbar navbar-default">
     <div class="container-fluid">
       <div class="navbar-header">
-        <a class="navbar-brand" href="#">
-      {#  <img id="logo" alt="Brand" src="..."> #}
+        <a class="navbar-brand" href="/user_frontpage">
+          <img id="logo" alt="Brand" src="/Users/camilaminer/src/Hackbright_Project/static/logo/logo.png">
         </a>
      </div>
     </div>
@@ -29,10 +29,14 @@
   {% block content %}BODY CONTENT GOES HERE{% endblock %}
 
   <br><br><br>
+  {% if session != {} %}
   <a href="/user_frontpage">Back to homepage</a><br>
   <!-- add an if statement that shows this only if there is a session initiated. -->
   <a href="/logout">Logout</a>
-  
+  {% else %}
+  <a href="/">Back to homepage</a><br>
+  <a href="/">Login</a>
+  {% endif %}
 
   <script src="http://code.jquery.com/jquery.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>

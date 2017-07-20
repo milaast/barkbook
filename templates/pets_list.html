@@ -8,13 +8,14 @@
 
   <ul>
       {% for pet in user.pets %}
-          <li>
-              <a href="/pets/{{ pet.pet_id }}">
-                {{ pet.name }} 
-              </a>
-          </li>
-      {% endfor %}
-    </ul>
 
+
+        <a href="/pets/{{ pet.pet_id }}">
+          <img src="{{ pet.picture }}"" alt="{{ pet.name }}">
+        </a><br>
+        <h3>{{ pet.name }}</h3>
+        <br><br>
+
+      {% endfor %}
 
 {% endblock %}
