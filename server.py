@@ -245,7 +245,7 @@ def delete_pet(pet_id):
 
 @app.route("/make_non_adoptable/<pet_id>")
 def delete_adopt_recs(pet_id): 
-    """ Make it so a pet isn;t up for adoption anymore. """
+    """ Make it so a pet isn't up for adoption anymore. """
 
     Adoption.query.filter(Adoption.pet.has(pet_id=pet_id)).delete(synchronize_session="fetch")
 
@@ -324,7 +324,7 @@ def see_puppy():
 
 if __name__ == '__main__':
 
-    app.debug = True
+    app.debug = False
     app.jinja_env.auto_reload = app.debug 
 
     connect_to_db(app)

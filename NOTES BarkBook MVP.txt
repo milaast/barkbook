@@ -1,9 +1,11 @@
 BARKBOOK
-Colors: Orange and turquoise OR orange and magenta (bright, deep pink)
 
+Color: 
+    turquoise: 24c3c3
+    magenta: e000bb
 
 Data resources: 
-    Fake people and pet (cats and dogs) profiles. 
+    Fake people and pet (cats and dogs) profiles. Used Faker for the people's profiles and Muttville database for the dogs (no API)
 
 MVP: 
     - User profiles: username, real name, a short description, location (city, zipcode), picture, e-mail.
@@ -16,9 +18,11 @@ MVP:
 
        DONE: Relationship between User and Pet: One User to many Pets. 
 
-       ### STILL NEEDS TO BE IMPLEMENTED: 
+        
     - A button that express interest in the pet and sends the owner a message with the persons email address. 
+    ## Made it so the owner can see the interested person's information on the list of people interested in the pet. 
     - Search feature: simple. By weight, by breed, by zipcode or city (NOT RADIUS).
+    ## Filter on which animals to see
     - Picture upload: user and pets 
     - testing! - might need some refactoring to make tests better. 
 
@@ -26,13 +30,13 @@ MVP:
 
     *** Other notes: ***
     DONE - Session: when the user creates a profile, start a session.
-    - Take user to a page to choose if they'd like to create a pet profile or to start searching for pets. (THIS PAGE NEEDS TO BE BUILT, AS WELL AS SEARCH FEATURE)
-   DONE - If user chooses to create a pet profile, use the user_id from the session that was started when they created the account. 
-    - Implement a link on the user's profile where they can create more pet profiles. (STILL NEED TO CREATE THE USER PROFILE TEMPLATE)
-    - When the user creates a pet profile, if they mark the pet up for adoption, automatically add that pet to adoptions table. 
-    - Logout function after user has logged in/created the account. (function has been created on server file but not implemented.)
-    - Implement 'interest button' that should only show in profiles of pets that are currently in adoption table
-    - Implement search feature 
+    DONE - Take user to a page to choose if they'd like to create a pet profile or to start searching for pets. (THIS PAGE NEEDS TO BE BUILT, AS WELL AS SEARCH FEATURE)
+    DONE - If user chooses to create a pet profile, use the user_id from the session that was started when they created the account. 
+    DONE - Implement a link on the user's profile where they can create more pet profiles. *DONE* (STILL NEED TO CREATE THE USER PROFILE TEMPLATE)
+    DONE - When the user creates a pet profile, if they mark the pet up for adoption, automatically add that pet to adoptions table. 
+    DONE - Logout function after user has logged in/created the account. (function has been created on server file but not implemented.)
+    DONE - Implement 'interest button' that should only show in profiles of pets that are currently in adoption table
+    KIND OF DONE - Implement search feature 
 
     *******************************************************************
 
@@ -45,11 +49,13 @@ Future features:
     - Google Location API (after MVP)
     - Messaging (NOT instant)
 
+    DONE: 
 Things to research: 
-    - The interest button. Sends a POST request to server. Separate data model. 
+    DONE - The interest button. Sends a POST request to server. Separate data model. 
     Profile requesting info. ID of pet profile that they express interest in. 
     "Give me records where someone asked about a pet that I own"
 
+    ALL DONE: 
     Each table will have unique IDs. 
     User table
     Pet table

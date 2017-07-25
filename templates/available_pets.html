@@ -8,7 +8,7 @@
     {% for pet in adoption_recs %}
 
       <a href="/pets/{{ pet.pet_id }}">
-        <img src="{{ pet.pet.picture }}"" alt="{{ pet.pet.name }}">
+        <img class="profile_pics" src="{{ pet.pet.picture }}" alt="{{ pet.pet.name }}">
       </a><br>
       <h3>{{ pet.pet.name }}</h3>
       <br><br>

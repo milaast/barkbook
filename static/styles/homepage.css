@@ -1,4 +1,12 @@
+body {
 
-#create_account {
-  padding-right: 70px;
+  background-size: cover;
+  background: url("/static/pictures/background.jpg") no-repeat center center;
+  font-family: 'Love Ya Like A Sister', cursive;
+  color:#2A0054;
+}
+
+h1 {
+    
+    font-size:60px;
 }

@@ -1,30 +1,45 @@
 {% extends 'base.html' %}
+
 {% block title %}Barkbook!{% endblock %}
 
-{% block content %}
-  <div class="container-fluid">
-    <div class="row">
-      <form class="form-inline" action="/" method="POST">
-        <div class="form-group">
-          <label for="email">Email address</label>
-          <input type="email" class="form-control" name="email" id="email">
-        </div>
-        <div class="form-group">
-          <label for="password">Password</label>
-          <input type="password" class="form-control" name="password" id="password">
-        </div>
-          <button type="submit" class="btn-default">Log in</button>
-      </form>
-    </div>
-  </div>
-  <br><br><br><br><br><br>
-  <div class="container-fluid">
-    <div class="row">
-      <!-- Fix CSS here. -->
-      <h3 id=create_account>
-      <a href="/register">Create an account!</a></h3>
-    </div>
-  </div>
+{% block css %}  
+<link rel="stylesheet" href="/static/styles/homepage.css"> 
+{% endblock %}
 
+{% block content %}
+
+  <div class="container-fluid">
+    <div id="title" class="row">
+      <h1 class="text-center">Barkbook</h1>
+    </div>
+    <div id="description" class="row">
+      <div class="col-sm-5">
+        <h3 class="text-left">Barkbook is a place for pets to find new homes through connecting their owners directly.</h3>
+      </div>
+      <div id="login" class="col-sm-5 col-sm-offset-6">
+        <h3>LOGIN</h3>
+        <form action="/" method="POST">
+          <div class="form-group">
+            <label for="email">Email address</label>
+            <input type="email" class="form-control" name="email" id="email">
+          </div>
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" class="form-control" name="password" id="password">
+          </div>
+            <button type="submit" class="btn-default">Log in</button>
+        </form>
+      </div>  
+
+      <div class="col-md-4 col-md-offset-8">
+        <h3 id="create_account">
+        <a class="btn btn-default btn-lg" href="/register" role="button">Create an account!</a></h3>
+      </div>
+    </div>
+    </div>
+
+  </div>
+  <div id="background_image" class="container-fluid"></div>
+  
 
 {% endblock %}

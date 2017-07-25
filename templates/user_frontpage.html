@@ -5,23 +5,20 @@
 {% block content %}
 
 <!-- First page the user comes accross after creating an account. Give the user options. -->
+  <div class="container-fluid">
+    <div id="menu" class="row">
+      <div class="col-sm-5">
+        <h1>Hello, {{ user.first_name }}!</h1>
+        <a href="/search_pets">See available pets</a><br>
 
-  <h1>Hello, {{ user.first_name }}!</h1>
+        <a href="/create_pet_profile">Create a pet profile</a><br> 
+      
+        <a href="/users/pets_list">See / edit my pets</a><br> 
 
-  <a href="/search_pets">See available pets</a><br>
-  <!-- Link is a form of submition that will call a function that will query the adoptions table in the database and show the user all the pets up for adoption -->
-
-  <a href="/create_pet_profile">Create a pet profile</a><br> 
-  <!-- OK!!!!! -->
-
-  <a href="/users/pets_list">See / edit my pets</a><br> 
-  <!-- Take user to a list of pets -->
-
-  <a href="/see_my_interests">See pets I am interested in</a><br> <!-- List of pets the user clicked "LIKE" on. 
-  QUERY DATABASE: INTEREST TABLE
-  Create a route and create like button on pet profile.  -->
-
-  
+        <a href="/see_my_interests">See pets I am interested in</a><br>
+      </div>
+    </div>
+  </div>
 
 
 
