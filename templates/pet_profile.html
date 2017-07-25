@@ -2,28 +2,39 @@
 {% block title %}Barkbook!{% endblock %}
 
 {% block content %}
+    
+  <div class="row" id="title">
+    <div class="col-md-6 col-md-offset-3" align="center">
+      {% if pet.species == 1 %}
+      <h1>Woof! I am {{ pet.name }}</h1>
+      <!-- Render picture of pups in database here? Image object and use Jinja to pick the right picture -->
+      {% elif pet.species == 2 %}
+      <h2>Meow! I am {{ pet.name }}</h2>
+      {% endif %}
+    </div> <!-- close col --> 
+  </div> <!-- close row -->
 
-    {% if pet.species == 1 %}
-    <h2>Woof! I am {{ pet.name }}</h2>
-    <!-- Render picture of pups in database here? Image object and use Jinja to pick the right picture -->
-    {% elif pet.species == 2 %}
-    <h2>Meow! I am {{ pet.name }}</h2>
-    {% endif %}
-    <br><br>
-    <img src="{{ pet.picture }}"" alt="{{ pet.name }}">
-    <br><br><br>
+  <div id="pet_profile" class="row">
+    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6" align="center">
+      <img src="{{ pet.picture }}"" alt="{{ pet.name }}">
+    </div>
+    <div id="pet_buttons" class="col-xs-12 col-sm-12 col-md-6 col-lg-6" align="center">
+      <div class="btn-group-vertical" role="group" aria-label="menu">
+        {% if current_user_is_pet_owner %}
+        <a class="btn btn-default btn-lg" href="/delete_pet/{{ pet.pet_id }}">Delete profile</a><br>
+        <a class="btn btn-default btn-lg" href="/make_non_adoptable/{{ pet.pet_id }}">This pet isn't adoptable anymore</a><br>
+        <a class="btn btn-default btn-lg" href="/make_adoptable/{{ pet.pet_id }}">This pet is adoptable</a><br>
+        <a class="btn btn-default btn-lg" href="/people_likes/{{ pet.pet_id }}">See people interested in {{ pet.name }}</a><br>
+        {% else %}
+        <a class="btn btn-default btn-lg" href="/show_interest/{{ pet.pet_id }}">I am interested in this pet!</a><br>
+        {% endif %}
+        <br><br>
+      </div> <!-- close btn div -->
+    </div>
+  </div>
 
- <!-- Call the function that will delete the pet from database --> 
-<a href="/delete_pet/{{ pet.pet_id }}">Delete profile</a><br>
 
-{% if current_user_is_pet_owner %}
-<a href="/make_non_adoptable/{{ pet.pet_id }}">This pet isn't adoptable anymore</a><br>
-<a href="/make_adoptable/{{ pet.pet_id }}">This pet is adoptable</a><br>
-<a href="/people_likes/{{ pet.pet_id }}">See people interested in {{ pet.name }}</a><br>
-{% else %}
-<a href="/show_interest/{{ pet.pet_id }}">I am interested in this pet!</a><br>
-{% endif %}
-<br><br>
+   
 
 
 

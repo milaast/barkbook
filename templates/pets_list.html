@@ -5,17 +5,25 @@
 
   <!-- Query pets database and list the pets that belong to the user in session -->
 
-
-  <ul>
+  <div class="row" id="my_pets">
+    <div class="col-md-6 col-md-offset-3">
+      <h1>My pets!</h1>
+    </div> <!-- close col --> 
+  </div> <!-- close row -->
+  {% set count = 0 %}
+    {% if count % 3 == 0 %}
+      <div id="available_pictures" class="row">
       {% for pet in user.pets %}
-
-
-        <a href="/pets/{{ pet.pet_id }}">
-          <img src="{{ pet.picture }}"" alt="{{ pet.name }}">
+        <div class="col-md-4" align="center">
+          <a href="/pets/{{ pet.pet_id }}">
+            <img class="profile_pics" src="{{ pet.picture }}" alt="{{ pet.name }}">
         </a><br>
         <h3>{{ pet.name }}</h3>
         <br><br>
-
+        </div>
+        {% set count = count + 1 %}
       {% endfor %}
+      </div>
+    {% endif %}
 
 {% endblock %}

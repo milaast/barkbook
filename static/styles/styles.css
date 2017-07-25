@@ -65,13 +65,29 @@ h1 {
 
 .profile_pics {
   height:400px ;
-  width:330px ;
 }
 
-#pictures {
+#available_pictures {
   padding-top:50px;
-  background: rgba(132, 117, 102, 0.75);
 }
 
+#create_pet {
+  background: rgba(132, 117, 102, 0.75);
+  padding: 40px;
+  font-size: 18px;
+}
 
+#pet_profile {
+  background: rgba(132, 117, 102, 0.75);
+  padding: 50px;
+}
 
+#pet_buttons {
+  padding-top:100px;
+}
+
+#interested_user {
+  background: rgba(132, 117, 102, 0.75);
+  padding: 50px;
+  font-size: 18px;
+}
