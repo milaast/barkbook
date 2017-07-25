@@ -3,11 +3,20 @@
 
 {% block content %}
 
+<div class="row">
+  <div id="search_buttons" class="col-md-8 col-md-offset-2" align="center">
+    <h1>What are you looking for?</h1>
+    <br><br>
+    <div class="btn-group-vertical" role="group" aria-label="menu">
+      <form action="/see_available_pets">
+        <button class="btn btn-default btn-lg" name="species" value="1" type="submit">Look for dogs</button>
+        <br><br><br>
+        <button class="btn btn-default btn-lg" name="species" value="2" type="submit">Look for cats</button>
+      </form>
+    </div>
+  </div>
+</div>
 
-  <form action="/see_available_pets">
-    <button name="species" value="1" type="submit">Look for dogs</button>
-    <button name="species" value="2" type="submit">Look for cats</button>
-  </form>
 
 
 {% endblock %}
