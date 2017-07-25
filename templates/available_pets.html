@@ -2,19 +2,21 @@
 {% block title %}Barkbook!{% endblock %}
 
 {% block content %}
-
-  <ul>
-    
-    {% for pet in adoption_recs %}
-      
-      <a href="/pets/{{ pet.pet_id }}">
-        <img class="profile_pics" src="{{ pet.pet.picture }}" alt="{{ pet.pet.name }}">
-      </a><br>
-      <h3>{{ pet.pet.name }}</h3>
-      <br><br>
-
-    {% endfor %}
-
-  </ul>
+  
+  {% set count = 0 %}
+    {% if count % 3 == 0 %}
+      <div id="pictures" class="row">
+      {% for pet in adoption_recs %}
+        <div class="col-md-4" align="center">
+          <a href="/pets/{{ pet.pet_id }}">
+            <img class="profile_pics" src="{{ pet.pet.picture }}" alt="{{ pet.pet.name }}">
+          </a><br>
+          <h3>{{ pet.pet.name }}</h3>
+          <br><br>
+        </div>
+        {% set count = count + 1 %}
+      {% endfor %}
+      </div>
+    {% endif %}
 
 {% endblock %}

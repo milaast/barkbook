@@ -63,12 +63,15 @@ h1 {
   background: rgba(132, 117, 102, 0.75);
 } 
 
+.profile_pics {
+  height:400px ;
+  width:330px ;
+}
 
-
-
-
-
-
+#pictures {
+  padding-top:50px;
+  background: rgba(132, 117, 102, 0.75);
+}
 
 
 
